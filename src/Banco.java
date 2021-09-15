@@ -1,10 +1,10 @@
 import java.util.ArrayList;
 
-public class Banco {
+public class Banco{
     
     private String nome;
     private String email;
-    private ArrayList<Cliente> clientes;
+    private ArrayList<ClientePF> clientes;
     private ArrayList<ContaCorrente> contas;
 
     public Banco(String nome, String email) {
@@ -14,7 +14,7 @@ public class Banco {
         contas = new ArrayList<>();
     }
 
-    public boolean adicionaCliente(Cliente cliente){
+    public boolean adicionaCliente(ClientePF cliente){
         
         //não pode haver cpf duplicado
         if(buscaCliente(cliente.getCpf())==null){
@@ -37,7 +37,7 @@ public class Banco {
     }
 
     //procurar na coleção de clientes um cliente com o CPF
-    public Cliente buscaCliente(String cpf){
+    public ClientePF buscaCliente(String cpf){
         
         //percorer todos os clientes        
         for(int i=0;i<clientes.size();i++){
@@ -72,7 +72,7 @@ public class Banco {
         return this.nome;
     }
 
-    public ArrayList<Cliente> getClientes(){
+    public ArrayList<ClientePF> getClientes(){
         return this.clientes;
     }
 

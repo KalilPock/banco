@@ -20,7 +20,7 @@ public class App {
         Scanner scan = new Scanner(System.in);
 
         String nome,cpf,agencia,numero,email;
-        Cliente cliente;
+        ClientePF cliente;
         ContaCorrente conta;
         double valor;
         int opcao,anoNascimento;
@@ -44,7 +44,7 @@ public class App {
                     System.out.println("Digite o ano de nascimento:");
                     anoNascimento = scan.nextInt();
 
-                    cliente = new Cliente(nome,email,cpf, anoNascimento);
+                    cliente = new ClientePF(nome, email, cpf, anoNascimento);
 
                     if(banco.adicionaCliente(cliente)){
                         System.out.println("Cliente adicionado!");
@@ -98,7 +98,7 @@ public class App {
                 case 4:
                     System.out.println("Listando todos os clientes...");
                     
-                    for(Cliente cli:banco.getClientes()){
+                    for(ClientePF cli:banco.getClientes()){
                         System.out.println("\t"+cli.toString());
                     }
                     System.out.println("###########");
@@ -149,7 +149,7 @@ public class App {
                     }else{
                         System.out.println("Conta não localizada!");
                     }
-
+                    System.out.println("###########");
                     break;
 
 
