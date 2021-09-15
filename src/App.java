@@ -13,7 +13,6 @@ public class App {
         System.out.println("7 - sacar de uma conta");
         System.out.println("0 - Sair");
         System.out.println("Digite uma opção:");
-
     }
     
     public static void main(String[] args) throws Exception {
@@ -32,6 +31,7 @@ public class App {
         showMenu();
         opcao = scan.nextInt();
         scan.nextLine();
+        
         while(opcao != 0){
             switch (opcao) {
                 case 1:
@@ -52,16 +52,30 @@ public class App {
                         System.out.println("Não foi possível adicionar o cliente!");
                     }
 
+                    System.out.println("###########");
                     break;
                 case 2:
                     System.out.println("Digite um CPF:");
                     cpf = scan.nextLine();
+                    
+                    cliente = banco.buscaCliente(cpf);
+                    
+                    if(cliente != null){
+                        System.out.println("Cliente encontrado!");
+                        System.out.println("\t"+cliente.toString());
+                    }else{
+                        System.out.println("Cliente não encontrado!");
+                    }
 
+                    System.out.println("###########");
                     break;
+
                 case 3:
                     System.out.println("Digite o cpf do cliente:");
                     cpf = scan.nextLine();
+                    
                     cliente = banco.buscaCliente(cpf);
+                    
                     if(cliente != null){
                         System.out.println("Cliente encontrado!");
                         System.out.println("Digite o número da conta:");
@@ -79,15 +93,23 @@ public class App {
                     }else{
                         System.out.println("Cliente não encontrado!");
                     }
+                    System.out.println("###########");
                     break;
                 case 4:
                     System.out.println("Listando todos os clientes...");
-
-
+                    
+                    for(Cliente cli:banco.getClientes()){
+                        System.out.println("\t"+cli.toString());
+                    }
+                    System.out.println("###########");
                     break;
                 case 5:
                     System.out.println("Listando todas as contas...");
 
+                    for(ContaCorrente con:banco.getContas()){
+                        System.out.println("\t"+con.toString());
+                    }
+                    System.out.println("###########");
                     break;
                 case 6:
                     System.out.println("Digite o agência da conta:");
@@ -97,6 +119,16 @@ public class App {
                     System.out.println("Valor para depositar:");
                     valor = scan.nextDouble();
 
+                    conta = banco.buscaConta(numero, agencia);
+
+                    if(conta != null){
+                        conta.depositar(valor);
+                        System.out.println("Depósito realizado com sucesso!");
+                    }else{
+                        System.out.println("Conta não localizada!");
+                    }
+                    System.out.println("###########");
+
                     break;
                 case 7:
                     System.out.println("Digite o agência da conta:");
@@ -105,6 +137,18 @@ public class App {
                     numero = scan.nextLine();
                     System.out.println("Valor para sacar:");
                     valor = scan.nextDouble();
+
+                    conta = banco.buscaConta(numero, agencia);
+
+                    if(conta != null){
+                        if(conta.sacar(valor)){
+                            System.out.println("Saque realizado com sucesso!");
+                        }else{
+                            System.out.println("Não há saldo disponível!!");
+                        }
+                    }else{
+                        System.out.println("Conta não localizada!");
+                    }
 
                     break;
 

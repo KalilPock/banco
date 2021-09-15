@@ -17,17 +17,23 @@ public class Banco {
     public boolean adicionaCliente(Cliente cliente){
         
         //não pode haver cpf duplicado
+        if(buscaCliente(cliente.getCpf())==null){
+            clientes.add(cliente);
+            return true;
+        }
+
+        return false;
         
-        clientes.add(cliente);
-        return true;
     }
 
     public boolean adicionaConta(ContaCorrente conta){
         
-        //não pode haver numero e agencia duplicado
-
-        contas.add(conta);
-        return true;
+        //não pode haver numero e agencia duplicados
+        if(buscaConta(conta.getNumero(), conta.getAgencia())==null){
+            contas.add(conta);
+            return true;
+        }
+        return false;
     }
 
     //procurar na coleção de clientes um cliente com o CPF
@@ -44,11 +50,14 @@ public class Banco {
     }
     
     public ContaCorrente buscaConta(String numero, String agencia){
-        ContaCorrente conta = null;
+        
+        for(ContaCorrente c:contas){
+            if(c.getAgencia().equals(agencia) && c.getNumero().equals(numero)){
+                return c;
+            }
+        }
 
-        //procurar na coleção de contas uma conta com o numero e com a agencia
-
-        return conta;
+        return null;
     }
 
     public String getEmail() {

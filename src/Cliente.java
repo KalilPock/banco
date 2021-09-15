@@ -34,6 +34,7 @@ public class Cliente {
         return this.anoNascimento;
     }
 
+    @Override
     public String toString(){
         return "Nome: "+nome+" Cpf:"+cpf+" E-mail:"+email+" Ano nascimento:"+anoNascimento;
     }
