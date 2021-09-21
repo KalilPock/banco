@@ -6,8 +6,7 @@ public class ContaPoupanca extends ContaCorrente {
     public ContaPoupanca(String numero, String agencia, ClientePF dono, double saldo ,double limite, double taxaRend) {
         super(numero,agencia,dono,saldo);
         this.limite = limite;
-        this.taxaRend = taxaRend;
-        
+        this.taxaRend = taxaRend;        
     }
     
     boolean sacar(double valor){

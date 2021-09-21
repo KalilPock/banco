@@ -25,4 +25,5 @@ public class ClientePJ extends Cliente{
     public String toString(){
         return "Nome: "+getNome()+" E-mail:"+getEmail()+" CNPJ:"+cnpj+" Funcionários:"+numeroFuncionarios;
     }
+    
 }
