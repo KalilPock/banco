@@ -4,17 +4,23 @@ public class Banco{
     
     private String nome;
     private String email;
-    private ArrayList<ClientePF> clientes;
+    private ArrayList<ContaPoupanca> contasPoupancas;
+    private ArrayList<ContaCorrenteEsp> contasEsps;
     private ArrayList<ContaCorrente> contas;
+    private ArrayList<ClientePJ> clientePJs;
+    private ArrayList<ClientePF> clientes;
 
     public Banco(String nome, String email) {
         this.nome = nome;
         this.setEmail(email);
         clientes = new ArrayList<>();
+        clientePJs = new ArrayList<>();
         contas = new ArrayList<>();
+        contasEsps = new ArrayList<>();
+        contasPoupancas = new ArrayList<>();
     }
 
-    public boolean adicionaCliente(ClientePF cliente){
+    public boolean adicionaClientePF(ClientePF cliente){
         
         //não pode haver cpf duplicado
         if(buscaCliente(cliente.getCpf())==null){
@@ -24,6 +30,37 @@ public class Banco{
 
         return false;
         
+    }
+    public boolean adicionaClientePJ(ClientePJ clientepj){
+        
+        //não pode haver cpf duplicado
+        if(buscaCliente(clientepj.getCpnj())==null){
+            clientePJs.add(clientepj);
+            return true;
+        }
+
+        return false;
+        
+    }
+
+    public boolean adicionaConta(ContaCorrenteEsp contaEsp){
+        
+        //não pode haver numero e agencia duplicados
+        if(buscaConta(contaEsp.getNumero(), contaEsp.getAgencia())==null){
+            contasEsps.add(contaEsp);
+            return true;
+        }
+        return false;
+    }
+
+    public boolean adicionaConta(ContaPoupanca contaPoup){
+        
+        //não pode haver numero e agencia duplicados
+        if(buscaConta(contaPoup.getNumero(), contaPoup.getAgencia())==null){
+            contasPoupancas.add(contaPoup);
+            return true;
+        }
+        return false;
     }
 
     public boolean adicionaConta(ContaCorrente conta){
@@ -79,5 +116,6 @@ public class Banco{
     public ArrayList<ContaCorrente> getContas(){
         return this.contas;
     }
+    
 
 }

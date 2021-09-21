@@ -1,11 +1,11 @@
 public class ContaCorrente {
     
     //atributos => caracteristicas
-    private String numero;
-    private String agencia;
-    private double saldo;
+    protected String numero;
+    protected String agencia;
+    protected double saldo;
     //Cliente
-    private ClientePF dono;
+    protected ClientePF dono;
 
     
     //métodos => ações

@@ -19,9 +19,15 @@ public class App {
         
         Scanner scan = new Scanner(System.in);
 
-        String nome,cpf,agencia,numero,email;
+        String nome,cpf,agencia,numero,email,cnpj;
         ClientePF cliente;
+        String dono;
+        double saldo, limite, taxaRend;
+        ClientePJ clientepj;
+        int pf_pj, tipcont, numeroFuncionarios;
         ContaCorrente conta;
+        ContaCorrenteEsp contaEsp;
+        ContaPoupanca contaPoup;
         double valor;
         int opcao,anoNascimento;
 
@@ -35,6 +41,11 @@ public class App {
         while(opcao != 0){
             switch (opcao) {
                 case 1:
+                    System.out.println("Pessoa Fisica digite 1 Juridica 2:");
+                    pf_pj = scan.nextInt();
+                    if ( pf_pj == 1) {
+
+                    nome = scan.nextLine();
                     System.out.println("Digite o nome:");
                     nome = scan.nextLine();
                     System.out.println("Digite o cpf:");
@@ -46,7 +57,7 @@ public class App {
 
                     cliente = new ClientePF(nome, email, cpf, anoNascimento);
 
-                    if(banco.adicionaCliente(cliente)){
+                    if(banco.adicionaClientePF(cliente)){
                         System.out.println("Cliente adicionado!");
                     }else{
                         System.out.println("Não foi possível adicionar o cliente!");
@@ -54,6 +65,32 @@ public class App {
 
                     System.out.println("###########");
                     break;
+
+                    }
+                    if ( pf_pj == 2) {
+
+                        System.out.println("Digite o nome:");
+                        nome = scan.nextLine();
+                        System.out.println("Digite o cnpj:");
+                        cnpj = scan.nextLine();
+                        System.out.println("Digite o e-mail:");
+                        email = scan.nextLine();
+                        System.out.println("Digite o Numero de funcionarios:");
+                        numeroFuncionarios = scan.nextInt();
+    
+                        clientepj = new ClientePJ(nome, email, cnpj, numeroFuncionarios);
+    
+                        if(banco.adicionaClientePJ(clientepj)){
+                            System.out.println("Cliente adicionado!");
+                        }else{
+                            System.out.println("Não foi possível adicionar o cliente!");
+                        }
+    
+                        System.out.println("###########");
+                        break;
+    
+                        }
+                    
                 case 2:
                     System.out.println("Digite um CPF:");
                     cpf = scan.nextLine();
@@ -78,6 +115,11 @@ public class App {
                     
                     if(cliente != null){
                         System.out.println("Cliente encontrado!");
+                        System.out.println("Digite: 1 para Conta Corrente Simples 2 para Conta Corrente Especial e 3 para Conta Poupanca");
+                        tipcont = scan.nextInt();
+
+                    if(tipcont == 1 ){
+                        scan.nextLine();
                         System.out.println("Digite o número da conta:");
                         numero = scan.nextLine();
                         System.out.println("Digite a agência da conta:");
@@ -90,6 +132,53 @@ public class App {
                         }else{
                             System.out.println("Não foi possível criar a conta!");
                         }
+                    }
+
+                    if(tipcont == 2 ){
+                        numero = scan.nextLine();
+                        System.out.println("Digite o número da conta:");
+                        numero = scan.nextLine();
+                        System.out.println("Digite a agência da conta:");
+                        agencia = scan.nextLine();
+                        System.out.println("Digite o saldo:");
+                        saldo = scan.nextDouble();
+                        System.out.println("Digite o limite:");
+                        limite= scan.nextDouble();
+                        
+
+                        contaEsp = new ContaCorrenteEsp( numero,  agencia, cliente, saldo ,limite);
+
+                        if(banco.adicionaConta(contaEsp)){
+                            System.out.println("Conta criada com sucesso!!");
+                        }else{
+                            System.out.println("Não foi possível criar a conta!");
+                        }
+                    }
+
+                    if(tipcont == 3 ){
+                        scan.nextLine();
+                        System.out.println("Digite o número da conta:");
+                        numero = scan.nextLine();
+                        System.out.println("Digite a agência da conta:");
+                        agencia = scan.nextLine();
+                        System.out.println("Digite o saldo:");
+                        saldo = scan.nextDouble();
+                        System.out.println("Digite o limite:");
+                        limite= scan.nextDouble();
+                        System.out.println("Digite a taxa de rendimento:");
+                        taxaRend= scan.nextDouble();
+                        
+
+                        contaPoup = new ContaPoupanca(numero,  agencia, cliente, saldo ,limite, taxaRend);
+
+                        if(banco.adicionaConta(contaPoup)){
+                            System.out.println("Conta criada com sucesso!!");
+                        }else{
+                            System.out.println("Não foi possível criar a conta!");
+                        }
+                    }
+            
+                        
                     }else{
                         System.out.println("Cliente não encontrado!");
                     }
